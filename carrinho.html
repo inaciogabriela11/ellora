@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Carrinho - ELLORA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #fff7f9;
+  margin: 0;
+}
+header {
+  background: #e6f4ea;
+  padding: 20px;
+}
+main {
+  max-width: 800px;
+  margin: 30px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+}
+.item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.total {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+button {
+  background: #5fa88d;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>Carrinho</h2>
+</header>
+
+<main id="carrinho"></main>
+
+<script>
+const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+const div = document.getElementById("carrinho");
+
+let total = 0;
+
+if (carrinho.length === 0) {
+  div.innerHTML = "<p>Seu carrinho está vazio.</p>";
+} else {
+  carrinho.forEach(p => {
+    total += p.preco;
+    div.innerHTML += `
+      <div class="item">
+        <span>${p.nome}</span>
+        <span>R$ ${p.preco.toFixed(2)}</span>
+      </div>
+    `;
+  });
+
+  div.innerHTML += `
+    <div class="total">Total: R$ ${total.toFixed(2)}</div>
+    <button onclick="finalizar()">Finalizar no Instagram</button>
+  `;
+}
+
+function finalizar() {
+  window.location.href = "https://instagram.com/ellora.skinn";
+}
+</script>
+
+</body>
+</html>
